@@ -1,0 +1,19 @@
+query MyQuery {
+  allProducts {
+    nodes {
+      description
+      name
+      score
+      productwavesByProductId(last: 1) {
+        nodes {
+          id
+          pricemilestoneByPriceMilestoneId {
+            value
+          }
+        }
+      }
+    }
+  }
+}
+
+
