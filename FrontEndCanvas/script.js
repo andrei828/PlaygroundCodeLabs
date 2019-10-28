@@ -20,6 +20,13 @@ function make2DArray(cols, rows) {
   var canvas = document.getElementById("defaultcanvas0");
   var previousX = null;
   var previousY = null;
+  var currentX;
+  var currentY;
+  var clickActive = false;
+  function neighbors(x, y) {
+    if (x != null && y != null && x >= 0 && y >= 0 && y < rows && x < cols && grid[x][y] != 3) 
+      rect(x * resolution, y * resolution, resolution + 1, resolution - 1);
+  }
 
   function setup() {
     createCanvas(1400, 800);
@@ -34,14 +41,14 @@ function make2DArray(cols, rows) {
     }
   }
   function draw() {
-    background(255);
+    background('#0d3575');
   
     for (let i = 0; i < cols; i++) {
       for (let j = 0; j < rows; j++) {
         let x = i * resolution;
         let y = j * resolution;
         if (grid[i][j] == 1) {
-          fill(255);
+          fill('255');
           stroke(0);
           rect(x, y, resolution - 1, resolution - 1);
         } else if (grid[i][j] == 2) {
@@ -49,44 +56,71 @@ function make2DArray(cols, rows) {
             stroke(1);
             rect(x, y, resolution - 1, resolution - 1);
         } else if (grid[i][j] == 3) {
-            fill(100);
+            fill('#eb4034');
             stroke(0);
             rect(x, y, resolution - 1, resolution - 1);
         }
       }
     }
+    if (clickActive === true) {
+      fill('#eb4034');
+      stroke(0);
+      grid[currentX][currentY] = 3
+      neighbors(currentX, currentY);
+    }
+    else {
+      fill('#adb6e0');
+      stroke(1);
+      neighbors(currentX, currentY);
+      neighbors(currentX + 1, currentY);
+      neighbors(currentX - 1, currentY);
+      neighbors(currentX, currentY + 1);
+      neighbors(currentX, currentY - 1);
+    
+      fill('#03ecfc');
+      stroke(0);
+      neighbors(currentX + 1, currentY + 1);
+      neighbors(currentX - 1, currentY - 1);
+      neighbors(currentX - 1, currentY + 1);
+      neighbors(currentX + 1, currentY - 1);
+    }
+    canvas.onmousemove = (e) => {
+      currentX = ceil(e.clientX / resolution) - 1;
+      currentY = ceil(e.clientY / resolution) - 1;
+      //   if (previousY === null && previousX === null) {
+      //       previousY = currentY
+      //       previousX = currentX
+      //   }
+      //   else if (previousY != currentY || previousX != currentX) {
+      //       if (grid[currentX][currentY] == 1) {
+      //           grid[currentX][currentY] = 2;
+      //           grid[currentX - 1][currentY - 1] = 2;
+      //           grid[currentX + 1][currentY + 1] = 2;
+      //           grid[currentX - 1][currentY + 1] = 2;
+      //           grid[currentX + 1][currentY - 1] = 2;
 
-    canvas.onmousemove = function(e) {
-        if (previousY === null && previousX === null) {
-            previousY = ceil(e.clientY / resolution) - 1;
-            previousX = ceil(e.clientX / resolution) - 1;
-        }
-        else if (previousY !== ceil(e.clientY / resolution) - 1 || previousX !== ceil(e.clientY / resolution) - 1) {
-            if (grid[ceil(e.clientX / resolution) - 1][ceil(e.clientY / resolution) - 1] !== 3) {
-                grid[ceil(e.clientX / resolution) - 1][ceil(e.clientY / resolution) - 1] = 2;
-                grid[previousX][previousY] = 1;
-                previousY = ceil(e.clientY / resolution) - 1;
-                previousX = ceil(e.clientX / resolution) - 1;
-            }
-        }
-        // if (previousX !== undefined && previousY !== undefined) {
-        //     grid[previousX][previousY] = 1;
-        // }
-        // else {
-        //     previousX = ceil(e.clientX / resolution) - 1;
-        //     previousY = ceil(e.clientY / resolution) - 1;
-        // }
 
-        
+      //           if (grid[previousX][previousY] !== 3) {
+      //             grid[previousX][previousY] = 1;
+      //             previousY = currentY;
+      //             previousX = currentX;
+      //           }else {
+      //             previousX = null
+      //             previousY = null
+      //           }
+      //       }       
+      //   }
     }
 
     canvas.onmousedown = function(e) {
+        clickActive = true;
         grid[ceil(e.clientX / resolution) - 1][ceil(e.clientY / resolution) - 1] = 3;
-        // y = (ceil(e.clientY / resolution) ) * resolution 
-        // x = (ceil(e.clientX / resolution)) * resolution
-        // print(x, y)
-        // rect(y, x, resolution + 1, resolution + 1);
     }
+
+    canvas.onmouseup = (e) => {
+      clickActive = false
+    }
+    
   
     // let next = make2DArray(cols, rows);
   
