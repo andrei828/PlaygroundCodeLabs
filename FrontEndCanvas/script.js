@@ -18,11 +18,12 @@ function make2DArray(cols, rows) {
   let rows;
   let resolution = 40;
   var canvas = document.getElementById("defaultcanvas0");
-  var previousX = null;
-  var previousY = null;
+  const coordinates = {}
   var currentX;
   var currentY;
+  var input;
   var clickActive = false;
+
   function neighbors(x, y) {
     if (x != null && y != null && x >= 0 && y >= 0 && y < rows && x < cols && grid[x][y] != 3) 
       rect(x * resolution, y * resolution, resolution + 1, resolution - 1);
@@ -32,7 +33,9 @@ function make2DArray(cols, rows) {
     createCanvas(1400, 800);
     cols = width / resolution;
     rows = height / resolution;
-  
+    input = document.createElement('input');
+    input.id = "input";
+    document.body.appendChild(input);
     grid = make2DArray(cols, rows);
     for (let i = 0; i < cols; i++) {
       for (let j = 0; j < rows; j++) {
@@ -40,6 +43,9 @@ function make2DArray(cols, rows) {
       }
     }
   }
+
+  
+
   function draw() {
     background('#0d3575');
   
@@ -67,6 +73,12 @@ function make2DArray(cols, rows) {
       stroke(0);
       grid[currentX][currentY] = 3
       neighbors(currentX, currentY);
+
+      if (coordinates[currentX] === undefined) {
+          coordinates[currentX] = new Set([currentY]);
+        } else {
+          coordinates[currentX].add(currentY);
+        }
     }
     else {
       fill('#adb6e0');
@@ -87,37 +99,33 @@ function make2DArray(cols, rows) {
     canvas.onmousemove = (e) => {
       currentX = ceil(e.clientX / resolution) - 1;
       currentY = ceil(e.clientY / resolution) - 1;
-      //   if (previousY === null && previousX === null) {
-      //       previousY = currentY
-      //       previousX = currentX
-      //   }
-      //   else if (previousY != currentY || previousX != currentX) {
-      //       if (grid[currentX][currentY] == 1) {
-      //           grid[currentX][currentY] = 2;
-      //           grid[currentX - 1][currentY - 1] = 2;
-      //           grid[currentX + 1][currentY + 1] = 2;
-      //           grid[currentX - 1][currentY + 1] = 2;
-      //           grid[currentX + 1][currentY - 1] = 2;
-
-
-      //           if (grid[previousX][previousY] !== 3) {
-      //             grid[previousX][previousY] = 1;
-      //             previousY = currentY;
-      //             previousX = currentX;
-      //           }else {
-      //             previousX = null
-      //             previousY = null
-      //           }
-      //       }       
-      //   }
     }
 
     canvas.onmousedown = function(e) {
+        clickActive = true
+        x_value = ceil(e.clientX / resolution) - 1;
+        y_value = ceil(e.clientY / resolution) - 1
         clickActive = true;
-        grid[ceil(e.clientX / resolution) - 1][ceil(e.clientY / resolution) - 1] = 3;
+        grid[x_value][y_value] = 3;
+
+        if (coordinates[x_value] === undefined) {
+          coordinates[x_value] = new Set([y_value]);
+        } else {
+          coordinates[x_value].add(y_value);
+        }
     }
 
     canvas.onmouseup = (e) => {
+      clickActive = false
+      localStorage.coords = ""
+      for (var x_value in coordinates) {
+	        coordinates[x_value].forEach((y_value) => {
+            localStorage.coords += x_value + ' ' + y_value + ' '
+	        })
+        }
+    }
+
+    canvas.onmouseleave = (e) => {
       clickActive = false
     }
     

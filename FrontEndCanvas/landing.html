@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            body {
+                text-align: center;
+            }
+            iframe {
+                border: none;
+                margin-left: 50px;
+            }
+            </style>
+            <script type="text/javascript" src="script.js"></script>
+            <script>
+                function get_coords() {
+                    var coords = localStorage.coords.split(' ')
+                    var paragraph = document.getElementById("p")
+                    paragraph.innerHTML = "["
+                    for (let i = 0; i < coords.length - 2; i +=2 ) { 
+                        console.log(coords[i], coords[i + 1])
+                        paragraph.innerHTML += coords[i] + ' ' + coords[i + 1] + ', '
+                    }
+                    paragraph.innerHTML = paragraph.innerHTML.slice(0, paragraph.innerHTML.length - 2) + ']'
+                }
+            </script>
+    </head>
+
+    <body>
+        <br><br><br><br>
+        <iframe id="canvas" src="index.html" width="1425" height="850"></iframe>
+        <br><button onclick="get_coords()">Get coordonates</button>
+        <p id="p"></p>
+    </body>
+</html>
