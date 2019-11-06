@@ -22,6 +22,11 @@
                     }
                     paragraph.innerHTML = paragraph.innerHTML.slice(0, paragraph.innerHTML.length - 2) + ']'
                 }
+
+                function set_draw() {
+                    console.log("grtgr")
+                    localStorage.drawGraham = "draw"
+                }
             </script>
     </head>
 
@@ -30,5 +35,7 @@
         <iframe id="canvas" src="index.html" width="1425" height="850"></iframe>
         <br><button onclick="get_coords()">Get coordonates</button>
         <p id="p"></p>
+
+        <button onclick="set_draw()">Draw</button>
     </body>
 </html>

@@ -1,10 +1,3 @@
-// Daniel Shiffman
-// http://codingtra.in
-// http://patreon.com/codingtrain
-
-// Game of Life
-// Video: https://youtu.be/FWSR_7kZuYg
-
 function make2DArray(cols, rows) {
     let arr = new Array(cols);
     for (let i = 0; i < arr.length; i++) {
@@ -29,6 +22,15 @@ function make2DArray(cols, rows) {
       rect(x * resolution, y * resolution, resolution + 1, resolution - 1);
   }
 
+  function drawLine(cell1X, cell1Y, cell2X, cell2Y) {
+    strokeWeight(5); 
+    line(cell1X * resolution + resolution / 2, 
+         cell1Y * resolution + resolution / 2, 
+         cell2X * resolution + resolution / 2, 
+         cell2Y * resolution + resolution / 2);
+    strokeWeight(1); 
+  }
+
   function setup() {
     createCanvas(1400, 800);
     cols = width / resolution;
@@ -44,9 +46,8 @@ function make2DArray(cols, rows) {
     }
   }
 
-  
-
   function draw() {
+    strokeWeight(1);
     background('#0d3575');
   
     for (let i = 0; i < cols; i++) {
@@ -68,6 +69,7 @@ function make2DArray(cols, rows) {
         }
       }
     }
+
     if (clickActive === true) {
       fill('#eb4034');
       stroke(0);
@@ -96,6 +98,24 @@ function make2DArray(cols, rows) {
       neighbors(currentX - 1, currentY + 1);
       neighbors(currentX + 1, currentY - 1);
     }
+
+    if (localStorage.drawGraham == "draw") {
+      //localStorage.drawGraham = ""
+
+      X = 0
+      Y = 1
+      list = []
+      for (var x_value in coordinates) {
+	      coordinates[x_value].forEach((y_value) => {
+          list.push([x_value, y_value])            
+	      })
+      }
+      
+      for (i = 1; i < list.length; i++) 
+        drawLine(list[i - 1][X], list[i - 1][Y], list[i][X], list[i][Y])
+      
+    }
+
     canvas.onmousemove = (e) => {
       currentX = ceil(e.clientX / resolution) - 1;
       currentY = ceil(e.clientY / resolution) - 1;
@@ -128,8 +148,9 @@ function make2DArray(cols, rows) {
     canvas.onmouseleave = (e) => {
       clickActive = false
     }
+
+   
     
-  
     // let next = make2DArray(cols, rows);
   
     // // Compute next based on grid
