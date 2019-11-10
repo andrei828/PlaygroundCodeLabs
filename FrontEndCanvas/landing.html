@@ -7,14 +7,22 @@
             }
             iframe {
                 border: none;
-                margin-left: 50px;
+                position: relative;
+                margin-left: -32px;
+                width: 110%;
+            }
+
+            #p {
+                visibility: hidden;  
             }
             </style>
             <script type="text/javascript" src="script.js"></script>
             <script>
                 function get_coords() {
+                    localStorage.state = "erase";
                     var coords = localStorage.coords.split(' ')
                     var paragraph = document.getElementById("p")
+                    paragraph.style.visibility = "visible"
                     paragraph.innerHTML = "["
                     for (let i = 0; i < coords.length - 2; i +=2 ) { 
                         console.log(coords[i], coords[i + 1])
@@ -31,11 +39,22 @@
     </head>
 
     <body>
-        <br><br><br><br>
+        <br><button onclick="get_coords()" style="display: inline-block;">Get coordonates</button>
+        <button onclick="set_draw()">Draw</button><br><br><br>
+        <span id="p"></span>
+        <br><br><br>
+        <form>
+            <input type="radio" 
+                   value="draw" 
+                   name="draw"
+                   checked="true"
+                   style="margin-left: 25px"> Draw </input>
+            <input type="radio"
+                   value="erase" 
+                   name="erase" 
+                   style="margin-left: 25px"> Erase </input>
+        </form>
         <iframe id="canvas" src="index.html" width="1425" height="850"></iframe>
-        <br><button onclick="get_coords()">Get coordonates</button>
-        <p id="p"></p>
-
-        <button onclick="set_draw()">Draw</button>
+        
     </body>
 </html>

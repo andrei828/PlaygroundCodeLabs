@@ -31,10 +31,24 @@ function make2DArray(cols, rows) {
     strokeWeight(1); 
   }
 
+  function updateLocalStorageCoords() {
+	localStorage.coords = ""
+	for (var x_value in coordinates) {
+		coordinates[x_value].forEach((y_value) => {
+			localStorage.coords += x_value + ' ' + y_value + ' '
+		})
+	}
+  }
+
   function setup() {
-    createCanvas(1400, 800);
-    cols = width / resolution;
-    rows = height / resolution;
+
+	localStorage.state = "draw"
+	localStorage.drawGraham = ""
+
+    console.log(window.innerWidth)
+    createCanvas(window.innerWidth + 50, 800);
+    cols = Math.floor(width / resolution);
+    rows = Math.floor(height / resolution);
     input = document.createElement('input');
     input.id = "input";
     document.body.appendChild(input);
@@ -43,7 +57,41 @@ function make2DArray(cols, rows) {
       for (let j = 0; j < rows; j++) {
         grid[i][j] = 1;
       }
-    }
+	}
+	
+	canvas.onmousemove = (e) => {
+		currentX = ceil(e.clientX / resolution) - 1;
+		currentY = ceil(e.clientY / resolution) - 1;
+	}
+
+	canvas.onmousedown = function(e) {
+		clickActive = true
+		x_value = ceil(e.clientX / resolution) - 1;
+		y_value = ceil(e.clientY / resolution) - 1
+
+		if (localStorage.state == "draw") {
+			grid[x_value][y_value] = 3;
+
+			if (coordinates[x_value] === undefined) {
+				coordinates[x_value] = new Set([y_value]);
+			} else {
+				coordinates[x_value].add(y_value);
+			}
+		} else if (localStorage.state == "erase") {
+			grid[x_value][y_value] = 1;
+			coordinates[x_value].delete(y_value)
+		}
+		updateLocalStorageCoords()
+	}
+
+	canvas.onmouseup = (e) => {
+		clickActive = false
+		updateLocalStorageCoords();
+	}
+
+	canvas.onmouseleave = (e) => {
+		clickActive = false
+	}
   }
 
   function draw() {
@@ -55,7 +103,7 @@ function make2DArray(cols, rows) {
         let x = i * resolution;
         let y = j * resolution;
         if (grid[i][j] == 1) {
-          fill('255');
+          fill(255);
           stroke(0);
           rect(x, y, resolution - 1, resolution - 1);
         } else if (grid[i][j] == 2) {
@@ -70,85 +118,84 @@ function make2DArray(cols, rows) {
       }
     }
 
-    if (clickActive === true) {
-      fill('#eb4034');
-      stroke(0);
-      grid[currentX][currentY] = 3
-      neighbors(currentX, currentY);
 
-      if (coordinates[currentX] === undefined) {
-          coordinates[currentX] = new Set([currentY]);
-        } else {
-          coordinates[currentX].add(currentY);
-        }
-    }
-    else {
-      fill('#adb6e0');
-      stroke(1);
-      neighbors(currentX, currentY);
-      neighbors(currentX + 1, currentY);
-      neighbors(currentX - 1, currentY);
-      neighbors(currentX, currentY + 1);
-      neighbors(currentX, currentY - 1);
-    
-      fill('#03ecfc');
-      stroke(0);
-      neighbors(currentX + 1, currentY + 1);
-      neighbors(currentX - 1, currentY - 1);
-      neighbors(currentX - 1, currentY + 1);
-      neighbors(currentX + 1, currentY - 1);
-    }
+	if (localStorage.state == "draw") {
+		if (clickActive === true) {
+		fill('#eb4034');
+		stroke(0);
+		grid[currentX][currentY] = 3
+		neighbors(currentX, currentY);
 
-    if (localStorage.drawGraham == "draw") {
-      //localStorage.drawGraham = ""
+			if (coordinates[currentX] === undefined) {
+				coordinates[currentX] = new Set([currentY]);
+			} else {
+				coordinates[currentX].add(currentY);
+			}
+		}
+		else {
+			fill('#adb6e0');
+			stroke(1);
+			neighbors(currentX, currentY);
+			neighbors(currentX + 1, currentY);
+			neighbors(currentX - 1, currentY);
+			neighbors(currentX, currentY + 1);
+			neighbors(currentX, currentY - 1);
+			
+			fill('#03ecfc');
+			stroke(0);
+			neighbors(currentX + 1, currentY + 1);
+			neighbors(currentX - 1, currentY - 1);
+			neighbors(currentX - 1, currentY + 1);
+			neighbors(currentX + 1, currentY - 1);
+		}
 
-      X = 0
-      Y = 1
-      list = []
-      for (var x_value in coordinates) {
-	      coordinates[x_value].forEach((y_value) => {
-          list.push([x_value, y_value])            
-	      })
-      }
-      
-      for (i = 1; i < list.length; i++) 
-        drawLine(list[i - 1][X], list[i - 1][Y], list[i][X], list[i][Y])
-      
-    }
+		if (localStorage.drawGraham == "draw") {
+			//localStorage.drawGraham = ""
 
-    canvas.onmousemove = (e) => {
-      currentX = ceil(e.clientX / resolution) - 1;
-      currentY = ceil(e.clientY / resolution) - 1;
-    }
+			X = 0
+			Y = 1
+			list = []
+			for (var x_value in coordinates) {
+				coordinates[x_value].forEach((y_value) => {
+				list.push([x_value, y_value])            
+			})
 
-    canvas.onmousedown = function(e) {
-        clickActive = true
-        x_value = ceil(e.clientX / resolution) - 1;
-        y_value = ceil(e.clientY / resolution) - 1
-        clickActive = true;
-        grid[x_value][y_value] = 3;
+			for (i = 1; i < list.length; i++) 
+			drawLine(list[i - 1][X], list[i - 1][Y], list[i][X], list[i][Y])
+		}
+	}
+		
+		
 
-        if (coordinates[x_value] === undefined) {
-          coordinates[x_value] = new Set([y_value]);
-        } else {
-          coordinates[x_value].add(y_value);
-        }
-    }
+	
+	} else if (localStorage.state == "erase") {
+		if (clickActive === true) {
+			fill(255);
+			stroke(0);
+			grid[currentX][currentY] = 1
+			coordinates[currentX].delete(currentY)
+			updateLocalStorageCoords()
+			neighbors(currentX, currentY);
+		}
+		else {
+			fill(220);
+			stroke(1);
+			neighbors(currentX, currentY);
+			neighbors(currentX + 1, currentY);
+			neighbors(currentX - 1, currentY);
+			neighbors(currentX, currentY + 1);
+			neighbors(currentX, currentY - 1);
+			
+			fill(230);
+			stroke(0);
+			neighbors(currentX + 1, currentY + 1);
+			neighbors(currentX - 1, currentY - 1);
+			neighbors(currentX - 1, currentY + 1);
+			neighbors(currentX + 1, currentY - 1);
+		}
+	}
 
-    canvas.onmouseup = (e) => {
-      clickActive = false
-      localStorage.coords = ""
-      for (var x_value in coordinates) {
-	        coordinates[x_value].forEach((y_value) => {
-            localStorage.coords += x_value + ' ' + y_value + ' '
-	        })
-        }
-    }
-
-    canvas.onmouseleave = (e) => {
-      clickActive = false
-    }
-
+  }
    
     
     // let next = make2DArray(cols, rows);
@@ -173,7 +220,7 @@ function make2DArray(cols, rows) {
     // }
   
     // grid = next;
-  }
+  
   
   
 //   function countNeighbors(grid, x, y) {
