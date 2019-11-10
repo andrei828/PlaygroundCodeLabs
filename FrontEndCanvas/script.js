@@ -14,7 +14,6 @@ function make2DArray(cols, rows) {
   const coordinates = {}
   var currentX;
   var currentY;
-  var input;
   var clickActive = false;
 
   function neighbors(x, y) {
@@ -49,9 +48,6 @@ function make2DArray(cols, rows) {
     createCanvas(window.innerWidth + 50, 800);
     cols = Math.floor(width / resolution);
     rows = Math.floor(height / resolution);
-    input = document.createElement('input');
-    input.id = "input";
-    document.body.appendChild(input);
     grid = make2DArray(cols, rows);
     for (let i = 0; i < cols; i++) {
       for (let j = 0; j < rows; j++) {
@@ -78,8 +74,10 @@ function make2DArray(cols, rows) {
 				coordinates[x_value].add(y_value);
 			}
 		} else if (localStorage.state == "erase") {
-			grid[x_value][y_value] = 1;
-			coordinates[x_value].delete(y_value)
+			if (coordinates[x_value] !== undefined && coordinates[x_value].has(y_value)) {
+				grid[x_value][y_value] = 1;
+				coordinates[x_value].delete(y_value)
+			}
 		}
 		updateLocalStorageCoords()
 	}
@@ -172,8 +170,10 @@ function make2DArray(cols, rows) {
 		if (clickActive === true) {
 			fill(255);
 			stroke(0);
-			grid[currentX][currentY] = 1
-			coordinates[currentX].delete(currentY)
+			if (coordinates[currentX] !== undefined && coordinates[currentX].has(currentY)) {
+				grid[currentX][currentY] = 1
+				coordinates[currentX].delete(currentY)
+			}
 			updateLocalStorageCoords()
 			neighbors(currentX, currentY);
 		}

@@ -1,49 +1,19 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <style>
-            body {
-                text-align: center;
-            }
-            iframe {
-                border: none;
-                position: relative;
-                margin-left: -32px;
-                width: 110%;
-            }
-
-            #p {
-                visibility: hidden;  
-            }
-            </style>
-            <script type="text/javascript" src="script.js"></script>
-            <script>
-                function get_coords() {
-                    localStorage.state = "erase";
-                    var coords = localStorage.coords.split(' ')
-                    var paragraph = document.getElementById("p")
-                    paragraph.style.visibility = "visible"
-                    paragraph.innerHTML = "["
-                    for (let i = 0; i < coords.length - 2; i +=2 ) { 
-                        console.log(coords[i], coords[i + 1])
-                        paragraph.innerHTML += coords[i] + ' ' + coords[i + 1] + ', '
-                    }
-                    paragraph.innerHTML = paragraph.innerHTML.slice(0, paragraph.innerHTML.length - 2) + ']'
-                }
-
-                function set_draw() {
-                    console.log("grtgr")
-                    localStorage.drawGraham = "draw"
-                }
-            </script>
+        <link rel="stylesheet" href="landing.css" />
+        <script type="text/javascript" src="script.js"></script>
+        <script type="text/javascript" src="landing.js"></script>
     </head>
 
     <body>
-        <br><button onclick="get_coords()" style="display: inline-block;">Get coordonates</button>
+        <h1>Geometry Visiualization</h1>
+        <!-- <br><button onclick="get_coords()" style="display: inline-block;">Get coordonates</button>
         <button onclick="set_draw()">Draw</button><br><br><br>
-        <span id="p"></span>
-        <br><br><br>
-        <form>
+        <span id="p"></span> -->
+       
+        <!-- <br><br><br> -->
+        <!-- <form>
             <input type="radio" 
                    value="draw" 
                    name="draw"
@@ -53,8 +23,22 @@
                    value="erase" 
                    name="erase" 
                    style="margin-left: 25px"> Erase </input>
-        </form>
-        <iframe id="canvas" src="index.html" width="1425" height="850"></iframe>
-        
+        </form> -->
+        <div class="container">
+            <div class="select">
+                <select name="slct" id="slct">
+                <option selected disabled>Choose an algorithm</option>
+                <option value="1">Pure CSS</option>
+                <option value="2">No JS</option>
+                <option value="3">Nice!</option>
+                </select>
+            </div>
+            <div class="pallete">
+                <img id="pencil_icon" src="pencil_icon2.png" onclick="pencil_clicked()" width="50px"/>
+                <img id="eraser_icon" src="eraser_icon1.png" onclick="eraser_clicked()" width="50px"/>
+                <img id="color_icon" src="color_icon.png" onclick="color_clicked()" width="50px"/>
+            </div>
+        </div>
+        <iframe scrolling="no" id="canvas" src="index.html" width="1425" height="850"></iframe>
     </body>
 </html>
