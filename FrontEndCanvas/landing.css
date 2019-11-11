@@ -114,7 +114,67 @@ select {
 
 
 
+#select_tab {
+  opacity: 0.95;
+	animation-name: fadeInOpacity;
+	animation-iteration-count: 1;
+	animation-timing-function: ease-in;
+	animation-duration: 0.3s;
+  display: none;
+  position: absolute;
+  width: 500px;
+  height: 265px;
+  border: 1px solid grey;
+  z-index: 2;
+  border-radius: 15px;
+  transform: translateY(40%) translateX(8%);
+  background-color: #d3d3d3;
+}
 
+@keyframes fadeInOpacity {
+	0% {
+    z-index: -1;
+    opacity: 0;
+    transform: translateY(-10%) translateX(8%);
+  }
+	100% {
+    z-index: 2;
+    opacity: 0.95;
+    transform: translateY(40%) translateX(8%);
+	}
+}
+
+@keyframes fadeOutOpacity {
+	0% {
+    opacity: 1;
+    transform: translateY(40%) translateX(8%);
+	}
+	100% {
+    opacity: 0;
+    transform: translateY(-10%) translateX(8%);
+	}
+}
+
+.algorithm_block {
+  cursor: pointer;
+  border: 1px solid black;
+  border-radius: 15px;
+  margin: 15px;
+  text-align: left;
+  padding-left: 15px;
+  padding-right: 20px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  opacity: 1;
+}
+
+.algorithm_title {
+  font-weight: bold;
+}
+
+.algorithm_desc {
+  font-weight: lighter;
+}
 
 
 
