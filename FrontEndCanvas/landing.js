@@ -17,7 +17,6 @@ window.onload = () => {
 }
 
 function get_coords() {
-    localStorage.state = "erase";
     var coords = localStorage.coords.split(' ')
     var paragraph = document.getElementById("p")
     paragraph.style.visibility = "visible"
