@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="UTF-8">
+        <meta name="description" content="Geometry">
+        <meta name="keywords" content="HTML,CSS,XML,JavaScript">
+        <meta name="author" content="Andrei Liviu">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="landing.css" />
         <script type="text/javascript" src="script.js"></script>
         <script type="text/javascript" src="landing.js"></script>
@@ -8,8 +13,10 @@
 
     <body>
        
-        <h1 style="font-weight: bold">Geometry Visiualization</h1>
-        <p style="font-size: 1.5em; color: grey">See algorithms in action</p>
+        <header>
+            <h1 style="font-weight: bold">Geometry Visiualization</h1>
+            <p style="font-size: 1.5em; color: grey">See algorithms in action</p>
+        </header>
         <!-- <br><button onclick="get_coords()" style="display: inline-block;">Get coordonates</button>
         <button onclick="set_draw()">Draw</button><br><br><br>
         <span id="p"></span> -->
@@ -81,31 +88,31 @@
             <div class="feature_1">
                 <div class="feat_image">
                     <img width="200" src="geometry.png" />
-                </div>
+                </div><br>
                 <div class="feat_text">
-                    <p>This is the feature description and plm fjertng rtkgniortengjrteugoinrt gitoyrhnglktr glitrn lkftrnig</p>
+                    <figcaption>This is the feature description and plm fjertng rtkgniortengjrteugoinrt gitoyrhnglktr glitrn lkftrnig</figcaption>
                 </div>
             </div>
             <div class="feature_1">
                 <div class="feat_image">
                     <img width="200" src="algorithms.png" />
-                </div>
+                </div><br>
                 <div class="feat_text">
-                    <p>This is the feature description and plm fjertng rtkgniortengjrteugoinrt gitoyrhnglktr glitrn lkftrnig</p>
+                    <figcaption>This is the feature description and plm fjertng rtkgniortengjrteugoinrt gitoyrhnglktr glitrn lkftrnig</figcaption>
                 </div>
             </div>
             <div class="feature_1">
                 <div class="feat_image">
                     <img width="200" src="visual.jpg" />
-                </div>
+                </div><br>
                 <div class="feat_text">
-                    <p>This is the feature description and plm fjertng rtkgniortengjrteugoinrt gitoyrhnglktr glitrn lkftrnig</p>
+                    <figcaption>This is the feature description and plm fjertng rtkgniortengjrteugoinrt gitoyrhnglktr glitrn lkftrnig</figcaption>
                 </div>
             </div>
         </div>
         <br><br><br><br><br><br>
         <div class="card">
-            <div class="card_container">
+            <article class="card_container">
                 <h1 style="font-weight: bold;">Graham Algorithm</h1>
                 <div class="alg_full_desc">
                     <p id="graham_desc"> Graham's scan is a method of finding the convex hull of a finite set of points in the plane with time complexity O(n log n). 
@@ -115,11 +122,11 @@
                     </p>
                     <img src="graham_img.gif" />
                 </div>
-            </div>
+            </article>
         </div>
         <br><br>
         <div class="card">
-            <div class="card_container">
+            <article class="card_container">
                 <h1 style="font-weight: bold;">Jarvis Algorithm</h1>
                 <div class="alg_full_desc">
                     <p id="graham_desc"> In the two-dimensional case the algorithm is also known as Jarvis march, after R. A. Jarvis, who published it in 1973; it has O(nh) time complexity, 
@@ -130,13 +137,20 @@
                     </p>
                     <img src="jarvis_img.png" />
                 </div>
-            </div>
+            </article>
         </div>
         <br><br><br><br>
 
-        <div class="about"><br>
+        <section class="about">
+            
             <div class="about_title"><h1 style="font-weight: bold; font-size: 3.5em;">About this website</h1></div>
             <div class="about_desc">
+                <div class="about_info">
+                    <ul id="about_ul">
+                        <li class="about_li">Date: 12-32-2019</li>
+                        <li class="about_li">Author: First Name</li>
+                    </ul>
+                </div>
                 <p style="font-size: 1.3em; width: 40%; line-height: 180%;">
                     This site was deisgned to provide a visualization of famous algorithms like
                     This site was deisgned to provide a visualization of famous algorithms like
@@ -144,18 +158,59 @@
                     This site was deisgned to provide a visualization of famous algorithms like
                 </p>
             </div>
-        </div>
-        <div class="card note">
+        </section>
+        <aside class="note">
             <div class="card_container">
             <h3>! Note</h3>
-                <p>The site is still under development. It will be done in the following weeks. Be pacient :)</p>
+                <p>The site is still under development. It will be done in the following weeks. Be pacient :)
+                    The site is still under development. It will be done in the following weeks. Be pacient :)
+                    The site is still under development. It will be done in the following weeks. Be pacient :)
+                </p>
             </div>
-        </div>
-        <br><br><br><br>
+        </aside>
+        
         <footer class="second_layer">
-            <p>This is the footer</p>
-            <p>This is the footer</p>
-            <p>This is the footer</p>
+            <div class="footer_container">
+                <div class="footer_title">
+                    <h2 style="font-size: 2.5em;">Geometry visualization</h2>
+                </div>
+
+                <div class="footer_algorithms_list">
+                    <ul style="line-height: 180%;">
+                        <h3>Algorithms used</h3>
+                        <li>Graham scan</li>
+                        <li>Jarvis Algorithm</li>
+                        <li>Other</li>
+                    </ul>
+                </div>
+                <div class="footer_documentation_list">
+                    <ul style="line-height: 180%;">
+                        <h3>Documentation</h3>
+                        <li>Wikipedia</li>
+                        <li>W3schools</li>
+                        <li>Stack Overflow</li>
+                        <li>Other</li>
+                    </ul>
+                </div>
+                <div class="footer_developer_list">
+                    <ul style="line-height: 180%;">
+                        <h3>About development</h3>
+                        <li>HTML</li>
+                        <li>CSS</li>
+                        <li>JavaScript</li>
+                        <li>Node</li>
+                    </ul>
+                </div>
+                <div class="footer_share_list">
+                    <ul style="line-height: 180%;">
+                        <h3>Social media</h3>
+                        <li>Github</li>
+                        <li>Facebook</li>
+                        <li>Instagram</li>
+                        <li>Youtube</li>
+                    </ul>
+                </div>
+            </div>
         </footer>
         <!-- <br><br><br><br><br><br> -->
     </body>
