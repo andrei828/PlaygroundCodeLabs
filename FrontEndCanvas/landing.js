@@ -1,7 +1,9 @@
 pencil_click = true;
 eraser_click = false;
+toggle_color_tab = false;
 toggle_algorithm_tab = false;
 
+var color_tab;
 var pencil_element;
 var eraser_element;
 var algorithms_tab;
@@ -10,6 +12,7 @@ window.onload = () => {
     pencil_element = document.getElementById("pencil_icon")
     eraser_element = document.getElementById("eraser_icon")
     algorithms_tab = document.getElementById("select_tab")
+    color_tab = document.getElementsByClassName("color_tab")[0];
     eraser_element.style.cursor = "pointer"
 }
 
@@ -57,6 +60,22 @@ function eraser_clicked() {
     } 
 }
 
+function toggle_colors_tab() {
+
+    if (toggle_color_tab == true) {
+        console.log(toggle_color_tab)
+
+        color_tab.style.display = "none"
+        toggle_color_tab = false
+
+    } else if (toggle_color_tab == false) {
+        console.log(toggle_color_tab)
+
+        color_tab.style.display = "block"
+        toggle_color_tab = true
+    }
+}
+
 function toggle_algorithms_tab() {
     
     if (toggle_algorithm_tab == true) {
@@ -72,3 +91,10 @@ function toggle_algorithms_tab() {
         toggle_algorithm_tab = true
     }
 }
+
+function change_color(element) {
+    localStorage.color = element.className.split(' ')[1]
+    color_tab.style.display = "none"
+    toggle_color_tab = false
+}
+

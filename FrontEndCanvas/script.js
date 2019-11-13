@@ -40,7 +40,7 @@ function make2DArray(cols, rows) {
   }
 
   function setup() {
-
+	localStorage.color = "red"
 	localStorage.state = "draw"
 	localStorage.drawGraham = ""
 
@@ -95,21 +95,20 @@ function make2DArray(cols, rows) {
   function draw() {
     strokeWeight(1);
     background('#0d3575');
-  
     for (let i = 0; i < cols; i++) {
       for (let j = 0; j < rows; j++) {
         let x = i * resolution;
         let y = j * resolution;
         if (grid[i][j] == 1) {
           fill(255);
-          stroke(0);
+          stroke('#3b43d6');
           rect(x, y, resolution - 1, resolution - 1);
         } else if (grid[i][j] == 2) {
             fill(200);
-            stroke(1);
+            stroke('red');
             rect(x, y, resolution - 1, resolution - 1);
         } else if (grid[i][j] == 3) {
-            fill('#eb4034');
+            fill(localStorage.color);
             stroke(0);
             rect(x, y, resolution - 1, resolution - 1);
         }
@@ -119,8 +118,8 @@ function make2DArray(cols, rows) {
 
 	if (localStorage.state == "draw") {
 		if (clickActive === true) {
-		fill('#eb4034');
-		stroke(0);
+		fill(localStorage.color);
+		stroke('red');
 		grid[currentX][currentY] = 3
 		neighbors(currentX, currentY);
 
@@ -132,7 +131,7 @@ function make2DArray(cols, rows) {
 		}
 		else {
 			fill('#adb6e0');
-			stroke(1);
+			stroke('red');
 			neighbors(currentX, currentY);
 			neighbors(currentX + 1, currentY);
 			neighbors(currentX - 1, currentY);

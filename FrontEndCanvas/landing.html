@@ -7,7 +7,9 @@
     </head>
 
     <body>
-        <h1>Geometry Visiualization</h1>
+       
+        <h1 style="font-weight: bold">Geometry Visiualization</h1>
+        <p style="font-size: 1.5em; color: grey">See algorithms in action</p>
         <!-- <br><button onclick="get_coords()" style="display: inline-block;">Get coordonates</button>
         <button onclick="set_draw()">Draw</button><br><br><br>
         <span id="p"></span> -->
@@ -54,9 +56,79 @@
             <div class="pallete">
                 <img id="pencil_icon" src="pencil_icon2.png" onclick="pencil_clicked()" width="50px"/>
                 <img id="eraser_icon" src="eraser_icon1.png" onclick="eraser_clicked()" width="50px"/>
-                <img id="color_icon" src="color_icon.png" onclick="color_clicked()" width="50px"/>
+                <img id="color_icon" src="color_icon.png" onclick="toggle_colors_tab()" width="50px"/>
+                <div class="color_tab" style="display: none;">
+                    <div class="wrapper">
+                        <div onclick="change_color(this)" class="color_pallete blue"></div>
+                        <div onclick="change_color(this)" class="color_pallete red"></div>
+                        <div onclick="change_color(this)" class="color_pallete green"></div>
+                        <div onclick="change_color(this)" class="color_pallete yellow"></div>
+                        <div onclick="change_color(this)" class="color_pallete magenta"></div>
+                        <div onclick="change_color(this)" class="color_pallete pink"></div>
+                        <div onclick="change_color(this)" class="color_pallete orange"></div>
+                        <div onclick="change_color(this)" class="color_pallete purple"></div>
+                        <div onclick="change_color(this)" class="color_pallete grey"></div>
+                    </div>
+                </div>
             </div>
         </div>
         <iframe scrolling="no" id="canvas" src="index.html" width="1425" height="850"></iframe>
+        <br><br><br>
+        <div class="features">
+            <div class="feature_1">
+                <div class="feat_image">
+                    <img width="200" src="geometry.png" />
+                </div>
+                <div class="feat_text">
+                    <p>This is the feature description and plm fjertng rtkgniortengjrteugoinrt gitoyrhnglktr glitrn lkftrnig</p>
+                </div>
+            </div>
+            <div class="feature_1">
+                <div class="feat_image">
+                    <img width="200" src="algorithms.png" />
+                </div>
+                <div class="feat_text">
+                    <p>This is the feature description and plm fjertng rtkgniortengjrteugoinrt gitoyrhnglktr glitrn lkftrnig</p>
+                </div>
+            </div>
+            <div class="feature_1">
+                <div class="feat_image">
+                    <img width="200" src="visual.jpg" />
+                </div>
+                <div class="feat_text">
+                    <p>This is the feature description and plm fjertng rtkgniortengjrteugoinrt gitoyrhnglktr glitrn lkftrnig</p>
+                </div>
+            </div>
+        </div>
+        <br><br><br><br><br><br>
+        <div class="card">
+            <div class="card_container">
+                <h1 style="font-weight: bold;">Graham Algorithm</h1>
+                <div class="alg_full_desc">
+                    <p id="graham_desc"> Graham's scan is a method of finding the convex hull of a finite set of points in the plane with time complexity O(n log n). 
+                        It is named after Ronald Graham, who published the original algorithm in 1972.
+                        The algorithm finds all vertices of the convex hull ordered along its boundary.
+                        It uses a stack to detect and remove concavities in the boundary efficiently. 
+                    </p>
+                    <img src="graham_img.gif" />
+                </div>
+            </div>
+        </div>
+        <br><br>
+        <div class="card">
+            <div class="card_container">
+                <h1 style="font-weight: bold;">Jarvis Algorithm</h1>
+                <div class="alg_full_desc">
+                    <p id="graham_desc"> In the two-dimensional case the algorithm is also known as Jarvis march, after R. A. Jarvis, who published it in 1973; it has O(nh) time complexity, 
+                        where n is the number of points and h is the number of points on the convex hull. 
+                        Its real-life performance compared with other convex hull algorithms is favorable when n is small 
+                        or h is expected to be very small with respect to n. 
+                        In general cases, the algorithm is outperformed by many others. 
+                    </p>
+                    <img src="jarvis_img.png" />
+                </div>
+            </div>
+        </div>
+        <br><br><br><br><br><br>
     </body>
 </html>
