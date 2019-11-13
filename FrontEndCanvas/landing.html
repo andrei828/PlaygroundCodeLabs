@@ -160,7 +160,7 @@
             </div>
         </section>
         <aside class="note">
-            <div class="card_container">
+            <div class="card_container" style="line-height: 150%;">
             <h3>! Note</h3>
                 <p>The site is still under development. It will be done in the following weeks. Be pacient :)
                     The site is still under development. It will be done in the following weeks. Be pacient :)
@@ -168,7 +168,48 @@
                 </p>
             </div>
         </aside>
-        
+
+        <div class="pseudocode">
+            <div class="pseudocode1">
+                <div class="pseudocode_container">
+                    <h1 style="font-weight: bold;">Graham Pseudocode</h1>
+                    <ol class="code" style="font-family: 'Courier New', Courier, monospace; font-size: 1.2em;">
+                    <li><b>let</b> points be the list of points</li>
+                    <li><b>let</b> stack = empty_stack()</li>
+                    <li></li>
+                    <li>find the lowest y-coordinate and leftmost point, called P0</li>
+                    <li><b>sort</b> points by polar angle with P0, if several points have the same polar angle then only keep the farthest</li>
+                    <li></li>
+                    <li><b>for</b> point <b>in</b> points:</li>
+                    <li style="color: grey">&nbsp&nbsp&nbsp&nbsp# pop the last point from the stack if we turn clockwise to reach this point</li>
+                    <li>&nbsp&nbsp&nbsp&nbsp<b>while</b> count stack > 1 <b>and</b> ccw(next_to_top(stack), top(stack), point) < 0:</li>
+                    <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b>pop</b> stack</li>
+                    <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b>push</b> point <b>to</b> stack</li>
+                    <li><b>end</b></li>
+                    </ol>
+                </div>
+            </div>
+            <div class="pseudocode1">
+                <div class="pseudocode_container">
+                    <h1 style="font-weight: bold;">Jarvis Pseudocode</h1>
+                    <ol class="code" style="font-family: 'Courier New', Courier, monospace; font-size: 1.2em;">
+                        <li><b>let</b> points be the list of points</li>
+                        <li><b>let</b> stack = empty_stack()</li>
+                        <li></li>
+                        <li>find the lowest y-coordinate and leftmost point, called P0</li>
+                        <li><b>sort</b> points by polar angle with P0, if several points have the same polar angle then only keep the farthest</li>
+                        <li></li>
+                        <li><b>for</b> point <b>in</b> points:</li>
+                        <li style="color: grey">&nbsp&nbsp&nbsp&nbsp# pop the last point from the stack if we turn clockwise to reach this point</li>
+                        <li>&nbsp&nbsp&nbsp&nbsp<b>while</b> count stack > 1 <b>and</b> ccw(next_to_top(stack), top(stack), point) < 0:</li>
+                        <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b>pop</b> stack</li>
+                        <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b>push</b> point <b>to</b> stack</li>
+                        <li><b>end</b></li>
+                        </ol>
+                </div>
+            </div>
+        </div>
+        <br><br><br>
         <footer class="second_layer">
             <div class="footer_container">
                 <div class="footer_title">
