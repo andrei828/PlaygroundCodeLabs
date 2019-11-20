@@ -45,6 +45,10 @@ iframe {
       flex-grow: 5;
   }
 
+  .pallete:nth-child(even) {
+    z-index: inherit;
+  }
+
   .select {
     position: relative;
     display: flex;
@@ -167,11 +171,11 @@ select {
     background-color: #24a0ed;
     background-image: none;
   }
-  /* Remove IE arrow */
+
   select::-ms-expand {
     display: none;
   }
-  /* Custom Select */
+  
   .select {
     position: relative;
     display: flex;
@@ -189,7 +193,7 @@ select {
     color: #fff;
     cursor: pointer;
   }
-  /* Arrow */
+
   .select::after {
     content: '\25BC';
     position: absolute;
@@ -208,9 +212,11 @@ select {
     color: #543402;
   }
   
+#select_tab nav:nth-child(1) {
+  z-index: inherit;
+}
 
-
-
+/* dropdown menu */
 #select_tab {
   opacity: 0.95;
 	animation-name: fadeInOpacity;
