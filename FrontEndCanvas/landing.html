@@ -1,14 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta charset="UTF-8">
+        <title>Geometry visiualization</title>
         <meta name="description" content="Geometry">
         <meta name="keywords" content="HTML,CSS,XML,JavaScript">
         <meta name="author" content="Andrei Liviu">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="landing.css" />
-        <script type="text/javascript" src="script.js"></script>
-        <script type="text/javascript" src="landing.js"></script>
+        <script src="script.js"></script>
+        <script src="landing.js"></script>
     </head>
 
     <body>
@@ -64,9 +65,9 @@
             </div>
         
             <div class="pallete">
-                <img id="pencil_icon" src="pencil_icon2.png" onclick="pencil_clicked()" width="50px"/>
-                <img id="eraser_icon" src="eraser_icon1.png" onclick="eraser_clicked()" width="50px"/>
-                <img id="color_icon" src="color_icon.png" onclick="toggle_colors_tab()" width="50px"/>
+                <img id="pencil_icon" src="pencil_icon2.png" onclick="pencil_clicked()" width="50" alt="pencil" />
+                <img id="eraser_icon" src="eraser_icon1.png" onclick="eraser_clicked()" width="50" alt="eraser" />
+                <img id="color_icon" src="color_icon.png" onclick="toggle_colors_tab()" width="50" alt="color" />
                 <div class="color_tab" style="display: none;">
                     <div class="wrapper">
                         <div onclick="change_color(this)" class="color_pallete blue"></div>
@@ -82,32 +83,34 @@
                 </div>
             </div>
         </div>
-        <iframe scrolling="no" id="canvas" src="index.html" width="1425" height="850"></iframe>
+
+        <iframe style="overflow-x: hidden; position: relative;" id="canvas" src="index.html" width="1425" height="850"></iframe>
+      
         <br><br><br>
         <div class="features">
             <div class="feature_1">
                 <div class="feat_image">
-                    <img width="200" src="geometry.png" />
+                    <img width="200" src="geometry.png" alt="geometry" />
                 </div><br>
-                <div class="feat_text">
+                <figure class="feat_text">
                     <figcaption>This is the feature description and plm fjertng rtkgniortengjrteugoinrt gitoyrhnglktr glitrn lkftrnig</figcaption>
-                </div>
+                </figure>
             </div>
             <div class="feature_1">
                 <div class="feat_image">
-                    <img width="200" src="algorithms.png" />
+                    <img width="200" src="algorithms.png" alt="algorithms" />
                 </div><br>
-                <div class="feat_text">
+                <figure class="feat_text">
                     <figcaption>This is the feature description and plm fjertng rtkgniortengjrteugoinrt gitoyrhnglktr glitrn lkftrnig</figcaption>
-                </div>
+                </figure>
             </div>
             <div class="feature_1">
                 <div class="feat_image">
-                    <img width="200" src="visual.jpg" />
+                    <img width="200" src="visual.jpg" alt="visual" />
                 </div><br>
-                <div class="feat_text">
+                <figure class="feat_text">
                     <figcaption>This is the feature description and plm fjertng rtkgniortengjrteugoinrt gitoyrhnglktr glitrn lkftrnig</figcaption>
-                </div>
+                </figure>
             </div>
         </div>
         <br><br><br><br><br><br>
@@ -120,7 +123,7 @@
                         The algorithm finds all vertices of the convex hull ordered along its boundary.
                         It uses a stack to detect and remove concavities in the boundary efficiently. 
                     </p>
-                    <img src="graham_img.gif" />
+                    <img src="graham_img.gif" alt="graham" />
                 </div>
             </article>
         </div>
@@ -135,7 +138,7 @@
                         or h is expected to be very small with respect to n. 
                         In general cases, the algorithm is outperformed by many others. 
                     </p>
-                    <img src="jarvis_img.png" />
+                    <img src="jarvis_img.png" alt="jarvis" />
                 </div>
             </article>
         </div>
@@ -181,10 +184,10 @@
                     <li><b>sort</b> points by polar angle with P0, if several points have the same polar angle then only keep the farthest</li>
                     <li></li>
                     <li><b>for</b> point <b>in</b> points:</li>
-                    <li style="color: grey">&nbsp&nbsp&nbsp&nbsp# pop the last point from the stack if we turn clockwise to reach this point</li>
-                    <li>&nbsp&nbsp&nbsp&nbsp<b>while</b> count stack > 1 <b>and</b> ccw(next_to_top(stack), top(stack), point) < 0:</li>
-                    <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b>pop</b> stack</li>
-                    <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b>push</b> point <b>to</b> stack</li>
+                    <li style="color: grey">&nbsp;&nbsp;&nbsp;&nbsp;# pop the last point from the stack if we turn clockwise to reach this point</li>
+                    <li>&nbsp;&nbsp;&nbsp;&nbsp;<b>while</b> count stack > 1 <b>and</b> ccw(next_to_top(stack), top(stack), point) < 0:</li>
+                    <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>pop</b> stack</li>
+                    <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>push</b> point <b>to</b> stack</li>
                     <li><b>end</b></li>
                     </ol>
                 </div>
@@ -200,10 +203,10 @@
                         <li><b>sort</b> points by polar angle with P0, if several points have the same polar angle then only keep the farthest</li>
                         <li></li>
                         <li><b>for</b> point <b>in</b> points:</li>
-                        <li style="color: grey">&nbsp&nbsp&nbsp&nbsp# pop the last point from the stack if we turn clockwise to reach this point</li>
-                        <li>&nbsp&nbsp&nbsp&nbsp<b>while</b> count stack > 1 <b>and</b> ccw(next_to_top(stack), top(stack), point) < 0:</li>
-                        <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b>pop</b> stack</li>
-                        <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b>push</b> point <b>to</b> stack</li>
+                        <li style="color: grey">&nbsp;&nbsp;&nbsp;&nbsp;# pop the last point from the stack if we turn clockwise to reach this point</li>
+                        <li>&nbsp;&nbsp;&nbsp;&nbsp;<b>while</b> count stack > 1 <b>and</b> ccw(next_to_top(stack), top(stack), point) < 0:</li>
+                        <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>pop</b> stack</li>
+                        <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>push</b> point <b>to</b> stack</li>
                         <li><b>end</b></li>
                         </ol>
                 </div>
@@ -218,7 +221,7 @@
 
                 <div class="footer_algorithms_list">
                     <ul style="line-height: 180%;">
-                        <h3>Algorithms used</h3>
+                        <li><h3>Algorithms used</h3></li>
                         <li>Graham scan</li>
                         <li>Jarvis Algorithm</li>
                         <li>Other</li>
@@ -226,7 +229,7 @@
                 </div>
                 <div class="footer_documentation_list">
                     <ul style="line-height: 180%;">
-                        <h3>Documentation</h3>
+                        <li><h3>Documentation</h3></li>
                         <li>Wikipedia</li>
                         <li>W3schools</li>
                         <li>Stack Overflow</li>
@@ -235,7 +238,7 @@
                 </div>
                 <div class="footer_developer_list">
                     <ul style="line-height: 180%;">
-                        <h3>About development</h3>
+                        <li><h3>About development</h3></li>
                         <li>HTML</li>
                         <li>CSS</li>
                         <li>JavaScript</li>
@@ -244,7 +247,7 @@
                 </div>
                 <div class="footer_share_list">
                     <ul style="line-height: 180%;">
-                        <h3>Social media</h3>
+                        <li><h3>Social media</h3></li>
                         <li>Github</li>
                         <li>Facebook</li>
                         <li>Instagram</li>

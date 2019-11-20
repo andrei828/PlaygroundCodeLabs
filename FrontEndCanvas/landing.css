@@ -14,9 +14,10 @@ iframe {
     position: relative;
     margin-left: -32px;
     width: 110%;
-    overflow: hidden;
+    overflow-y: hidden;
     
 }
+
 
 #p {
     visibility: hidden;  
