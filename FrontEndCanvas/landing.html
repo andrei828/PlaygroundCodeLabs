@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <title>Geometry visiualization</title>
+        <base href = "file:///Users/andreiliviu/Documents/Facultate/PlaygroundCodeLabs/FrontEndCanvas/landing.html" />
         <meta name="description" content="Geometry">
         <meta name="keywords" content="HTML,CSS,XML,JavaScript">
         <meta name="author" content="Andrei Liviu">
@@ -16,7 +17,7 @@
        
         <header>
             <h1 style="font-weight: bold">Geometry Visiualization</h1>
-            <p style="font-size: 1.5em; color: grey">See algorithms in action</p>
+            <h5 style="font-size: 1.5em; color: grey; font-weight: lighter; margin-top: -1%;">See algorithms in action</h5>
         </header>
         <!-- <br><button onclick="get_coords()" style="display: inline-block;">Get coordonates</button>
         <button onclick="set_draw()">Draw</button><br><br><br>
@@ -42,9 +43,10 @@
                 <option value="2">No JS</option>
                 <option value="3">Nice!</option>
                 </select> -->
-                <select>
+                <!-- <select>
                     <span selected disabled>Select algorithm</span>
-                </select>
+                </select> -->
+                <span id="choose_alg">&nbsp;&nbsp;&nbsp; Choose an algorithm</span>
             </div>
            
             <div id="select_tab">
@@ -84,7 +86,7 @@
             </div>
         </div>
 
-        <iframe style="overflow-x: hidden; position: relative;" id="canvas" src="index.html" width="1425" height="850"></iframe>
+        <!-- <iframe id="canvas" src="index.html" width="1425" height="850"></iframe> -->
       
         <br><br><br>
         <div class="features">
@@ -93,7 +95,7 @@
                     <img width="200" src="geometry.png" alt="geometry" />
                 </div><br>
                 <figure class="feat_text">
-                    <figcaption>This is the feature description and plm fjertng rtkgniortengjrteugoinrt gitoyrhnglktr glitrn lkftrnig</figcaption>
+                    <figcaption><h6 style="font-weight: lighter; font-size: 1em; margin-top: -1%;">This is the feature description and plm fjertng rtkgniortengjrteugoinrt gitoyrhnglktr glitrn lkftrnig</h6></figcaption>
                 </figure>
             </div>
             <div class="feature_1">
@@ -101,7 +103,7 @@
                     <img width="200" src="algorithms.png" alt="algorithms" />
                 </div><br>
                 <figure class="feat_text">
-                    <figcaption>This is the feature description and plm fjertng rtkgniortengjrteugoinrt gitoyrhnglktr glitrn lkftrnig</figcaption>
+                    <figcaption><h6 style="font-weight: lighter; font-size: 1em; margin-top: -1%;">This is the feature description and fjertng rtkgniortengjrteugoinrt gitoyrhnglktr glitrn lkftrnig</h6></figcaption>
                 </figure>
             </div>
             <div class="feature_1">
@@ -109,36 +111,36 @@
                     <img width="200" src="visual.jpg" alt="visual" />
                 </div><br>
                 <figure class="feat_text">
-                    <figcaption>This is the feature description and plm fjertng rtkgniortengjrteugoinrt gitoyrhnglktr glitrn lkftrnig</figcaption>
+                    <figcaption><h6 style="font-weight: lighter; font-size: 1em; margin-top: -1%;">This is the feature description and gertng rtkgniortengjrteugoinrt gitoyrhnglktr glitrn lkftrnig</h6></figcaption>
                 </figure>
             </div>
         </div>
         <br><br><br><br><br><br>
         <div class="card">
             <article class="card_container">
-                <h1 style="font-weight: bold;">Graham Algorithm</h1>
+                <h2 style="font-weight: bold; font-size: 3.5em;">Graham Algorithm</h2>
                 <div class="alg_full_desc">
                     <p id="graham_desc"> Graham's scan is a method of finding the convex hull of a finite set of points in the plane with time complexity O(n log n). 
                         It is named after Ronald Graham, who published the original algorithm in 1972.
                         The algorithm finds all vertices of the convex hull ordered along its boundary.
                         It uses a stack to detect and remove concavities in the boundary efficiently. 
                     </p>
-                    <img src="graham_img.gif" alt="graham" />
+                    <img id="graham_photo" src="graham_img.gif" alt="graham" />
                 </div>
             </article>
         </div>
         <br><br>
         <div class="card">
             <article class="card_container">
-                <h1 style="font-weight: bold;">Jarvis Algorithm</h1>
+                <h2 style="font-weight: bold; font-size: 3.5em;">Jarvis Algorithm</h2>
                 <div class="alg_full_desc">
-                    <p id="graham_desc"> In the two-dimensional case the algorithm is also known as Jarvis march, after R. A. Jarvis, who published it in 1973; it has O(nh) time complexity, 
+                    <p id="jarvis_desc"> In the two-dimensional case the algorithm is also known as Jarvis march, after R. A. Jarvis, who published it in 1973; it has O(nh) time complexity, 
                         where n is the number of points and h is the number of points on the convex hull. 
                         Its real-life performance compared with other convex hull algorithms is favorable when n is small 
                         or h is expected to be very small with respect to n. 
                         In general cases, the algorithm is outperformed by many others. 
                     </p>
-                    <img src="jarvis_img.png" alt="jarvis" />
+                    <img id="jarvis_photo" src="jarvis_img.png" alt="jarvis" />
                 </div>
             </article>
         </div>
@@ -146,7 +148,7 @@
 
         <section class="about">
             
-            <div class="about_title"><h1 style="font-weight: bold; font-size: 3.5em;">About this website</h1></div>
+            <header class="about_title"><h2 style="font-weight: bold; font-size: 3.5em;">About this website</h2></header>
             <div class="about_desc">
                 <div class="about_info">
                     <ul id="about_ul">
@@ -154,7 +156,7 @@
                         <li class="about_li">Author: First Name</li>
                     </ul>
                 </div>
-                <p style="font-size: 1.3em; width: 40%; line-height: 180%;">
+                <p class="about_paragraph">
                     This site was deisgned to provide a visualization of famous algorithms like
                     This site was deisgned to provide a visualization of famous algorithms like
                     This site was deisgned to provide a visualization of famous algorithms like
@@ -164,7 +166,7 @@
         </section>
         <aside class="note">
             <div class="card_container" style="line-height: 150%;">
-            <h3>! Note</h3>
+            <h4 style="font-size: 1.5em;">! Note</h4>
                 <p>The site is still under development. It will be done in the following weeks. Be pacient :)
                     The site is still under development. It will be done in the following weeks. Be pacient :)
                     The site is still under development. It will be done in the following weeks. Be pacient :)
@@ -185,7 +187,7 @@
                     <li></li>
                     <li><b>for</b> point <b>in</b> points:</li>
                     <li style="color: grey">&nbsp;&nbsp;&nbsp;&nbsp;# pop the last point from the stack if we turn clockwise to reach this point</li>
-                    <li>&nbsp;&nbsp;&nbsp;&nbsp;<b>while</b> count stack > 1 <b>and</b> ccw(next_to_top(stack), top(stack), point) < 0:</li>
+                    <li>&nbsp;&nbsp;&nbsp;&nbsp;<b>while</b> count stack > 1 <b>and</b> ccw(next_to_top(stack), top(stack), point) &lt; 0:</li>
                     <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>pop</b> stack</li>
                     <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>push</b> point <b>to</b> stack</li>
                     <li><b>end</b></li>
@@ -204,7 +206,7 @@
                         <li></li>
                         <li><b>for</b> point <b>in</b> points:</li>
                         <li style="color: grey">&nbsp;&nbsp;&nbsp;&nbsp;# pop the last point from the stack if we turn clockwise to reach this point</li>
-                        <li>&nbsp;&nbsp;&nbsp;&nbsp;<b>while</b> count stack > 1 <b>and</b> ccw(next_to_top(stack), top(stack), point) < 0:</li>
+                        <li>&nbsp;&nbsp;&nbsp;&nbsp;<b>while</b> count stack > 1 <b>and</b> ccw(next_to_top(stack), top(stack), point) &lt; 0:</li>
                         <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>pop</b> stack</li>
                         <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>push</b> point <b>to</b> stack</li>
                         <li><b>end</b></li>
@@ -222,40 +224,39 @@
                 <div class="footer_algorithms_list">
                     <ul style="line-height: 180%;">
                         <li><h3>Algorithms used</h3></li>
-                        <li>Graham scan</li>
-                        <li>Jarvis Algorithm</li>
-                        <li>Other</li>
+                        <li><h4 style="font-weight: lighter; line-height: 50%;">Graham scan</h4></li>
+                        <li><h4 style="font-weight: lighter; line-height: 50%;">Jarvis Algorithm</h4></li>
+                        <li><h4 style="font-weight: lighter; line-height: 50%;">Other</h4></li>
                     </ul>
                 </div>
                 <div class="footer_documentation_list">
                     <ul style="line-height: 180%;">
                         <li><h3>Documentation</h3></li>
-                        <li>Wikipedia</li>
-                        <li>W3schools</li>
-                        <li>Stack Overflow</li>
-                        <li>Other</li>
+                        <li><h4 style="font-weight: lighter; line-height: 50%;">Wikipedia</h4></li>
+                        <li><h4 style="font-weight: lighter; line-height: 50%;">W3schools</h4></li>
+                        <li><h4 style="font-weight: lighter; line-height: 50%;">Stack Overflow</h4></li>
+                        <li><h4 style="font-weight: lighter; line-height: 50%;">Other</h4></li>
                     </ul>
                 </div>
                 <div class="footer_developer_list">
                     <ul style="line-height: 180%;">
                         <li><h3>About development</h3></li>
-                        <li>HTML</li>
-                        <li>CSS</li>
-                        <li>JavaScript</li>
-                        <li>Node</li>
+                        <li><h4 style="font-weight: lighter; line-height: 50%;">HTML</h4></li>
+                        <li><h4 style="font-weight: lighter; line-height: 50%;">CSS</h4></li>
+                        <li><h4 style="font-weight: lighter; line-height: 50%;">JavaScript</h4></li>
+                        <li><h4 style="font-weight: lighter; line-height: 50%;">Node</h4></li>
                     </ul>
                 </div>
                 <div class="footer_share_list">
                     <ul style="line-height: 180%;">
                         <li><h3>Social media</h3></li>
-                        <li>Github</li>
-                        <li>Facebook</li>
-                        <li>Instagram</li>
-                        <li>Youtube</li>
+                        <li><h4 style="font-weight: lighter; line-height: 50%;">Github</h4></li>
+                        <li><h4 style="font-weight: lighter; line-height: 50%;">Facebook</h4></li>
+                        <li><h4 style="font-weight: lighter; line-height: 50%;">Instagram</h4></li>
+                        <li><h4 style="font-weight: lighter; line-height: 50%;">Youtube</h4></li>
                     </ul>
                 </div>
             </div>
         </footer>
-        <!-- <br><br><br><br><br><br> -->
     </body>
 </html>
