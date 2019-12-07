@@ -1,3 +1,5 @@
+// import { loadOptions } from "@babel/core";
+
   function make2DArray(cols, rows) {
     let arr = new Array(cols);
     for (let i = 0; i < arr.length; i++) {
@@ -10,13 +12,15 @@
   let cols;
   let rows;
   let resolution = 40;
-  var canvas = document.getElementById("defaultcanvas0");
+  var canvas = document.getElementById("defaultcanvas0")
   const coordinates = {}
-  var currentX;
-  var currentY;
+  var currentX
+  var currentY
+  var doneAlgorithm = 0
   var previousList = []
-  var calculating = false;
-  var clickActive = false;
+  var displayPoints = []
+  var calculating = false
+  var clickActive = false
 
   function neighbors(x, y) {
     if (x != null && y != null && x >= 0 && y >= 0 && y < rows && x < cols && grid[x][y] != 3) 
@@ -50,10 +54,14 @@
 	this.y = y
   }
 
-  var grahamScan = (points) => {
+  var grahamScan = async (points) => {
 	console.log("Calculating")
-	if (points.length <= 3) {
-		calculating = true;
+	if (points.length < 3) {
+		calculating = true
+		doneAlgorithm = 1
+		displayPoints = points.splice(0)
+		await sleep(300)
+		loop()
 		return points
 	}
 
@@ -77,6 +85,10 @@
 	    	distance: Math.sqrt(targetPoint.x * targetPoint.x +
 							 	targetPoint.y * targetPoint.y)
 	    }
+	}
+
+	printLinePaths = (linePaths) => {
+		linePaths.forEach(point)
 	}
 
 	pivot = points[0]
@@ -108,22 +120,30 @@
 			pointB = pointA
 			pointA = result[len - 2]
 		}
-		// stroke(155, 155, 0);
-  		// strokeWeight(1);
-		// drawLine(pointB.x, pointB.y, pointC.x, pointC.y)
-		// await sleep(500)
+		
+		stroke(155, 155, 0);
+		strokeWeight(0);  
+		drawLine(pointB.x, pointB.y, pointC.x, pointC.y)
+		await sleep(300)
+
 		result[len++] = pointC
 	}
 	result.length = len
-	// stroke(0);
-	// strokeWeight(1);
-	// drawLine(result[result.length - 1].x, result[result.length - 1].y, result[0].x, result[0].y)
-	// await sleep(500)
-	// for (i = 1; i < result.length; i++) {
-	// 	drawLine(result[i - 1].x, result[i - 1].y, result[i].x, result[i].y)
-	// 	await sleep(500)
-	// }
-	calculating = true;
+	
+	stroke(0);
+	strokeWeight(2);
+	drawLine(result[result.length - 1].x, result[result.length - 1].y, result[0].x, result[0].y)
+	await sleep(300)
+	for (i = 1; i < result.length; i++) {
+		drawLine(result[i - 1].x, result[i - 1].y, result[i].x, result[i].y)
+		await sleep(300)
+	}
+
+	calculating = true
+	doneAlgorithm = 1
+	displayPoints = result.splice(0)
+	
+	loop()
 	return result	
   }
 
@@ -180,7 +200,6 @@
 
 	canvas.onmouseleave = (e) => {
 		clickActive = false
-		calculating = false
 	}
   }
 
@@ -206,7 +225,6 @@
         }
       }
     }
-
 
 	if (localStorage.state == "draw") {
 		if (clickActive === true) {
@@ -237,31 +255,7 @@
 			neighbors(currentX - 1, currentY + 1);
 			neighbors(currentX + 1, currentY - 1);
 		}
-
-		if (localStorage.drawGraham == "draw") {
-			X = 0, Y = 1, list = []
-			for (var x_value in coordinates) {
-				coordinates[x_value].forEach((y_value) => {
-					// list.push([x_value, y_value]) 
-					list.push(new Point(parseInt(x_value), y_value))           
-				})
-			}
-			if (calculating == false) {
-				list = grahamScan(list)
-				previousList = list.slice(0)
-			} else {
-				list = previousList.slice(0)
-			} 
-
-			drawLine(list[list.length - 1].x, list[list.length - 1].y, list[0].x, list[0].y)
-			for (i = 1; i < list.length; i++) 
-				drawLine(list[i - 1].x, list[i - 1].y, list[i].x, list[i].y)
-		}
 		
-		
-		
-
-	
 	} else if (localStorage.state == "erase") {
 		if (clickActive === true) {
 			fill(255);
@@ -291,44 +285,38 @@
 		}
 	}
 
-  }
+	if (localStorage.drawGraham == "draw") {
+		X = 0, Y = 1, list = []
+		for (var x_value in coordinates) {
+			coordinates[x_value].forEach((y_value) => {
+				list.push(new Point(parseInt(x_value), y_value))           
+			})
+		}
+		
+		if (list.length > 2) {
+		
+			if (calculating == false) {
+				
+				list = grahamScan(list)
+				if (list[0] === undefined) {
+					noLoop()
+					console.log("testinggg")
+				}
+				
+			} else if (doneAlgorithm == 1) {
+				console.log("Done Algorithm")
+				doneAlgorithm = 2
 
-   
-    
-    // let next = make2DArray(cols, rows);
-  
-    // // Compute next based on grid
-    // for (let i = 0; i < cols; i++) {
-    //   for (let j = 0; j < rows; j++) {
-    //     let state = grid[i][j];
-    //     // Count live neighbors!
-    //     let sum = 0;
-    //     let neighbors = countNeighbors(grid, i, j);
-  
-    //     if (state == 0 && neighbors == 3) {
-    //       next[i][j] = 1;
-    //     } else if (state == 1 && (neighbors < 2 || neighbors > 3)) {
-    //       next[i][j] = 0;
-    //     } else {
-    //       next[i][j] = state;
-    //     }
-  
-    //   }
-    // }
-  
-    // grid = next;
-  
-  
-  
-//   function countNeighbors(grid, x, y) {
-//     let sum = 0;
-//     for (let i = -1; i < 2; i++) {
-//       for (let j = -1; j < 2; j++) {
-//         let col = (x + i + cols) % cols;
-//         let row = (y + j + rows) % rows;
-//         sum += grid[col][row];
-//       }
-//     }
-//     sum -= grid[x][y];
-//     return sum;
-//   }
+			} else if (doneAlgorithm == 2) {
+				doneAlgorithm = 2
+				drawLine(displayPoints[displayPoints.length - 1].x, displayPoints[displayPoints.length - 1].y, displayPoints[0].x, displayPoints[0].y)
+				for (i = 1; i < displayPoints.length; i++) 
+					drawLine(displayPoints[i - 1].x, displayPoints[i - 1].y, displayPoints[i].x, displayPoints[i].y)
+				
+			}
+		} else if (list.length == 2) {
+			drawLine(list[0].x, list[0].y, list[1].x, list[1].y)
+		}
+	}
+
+  }

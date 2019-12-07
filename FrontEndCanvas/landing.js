@@ -16,72 +16,25 @@ window.onload = () => {
     eraser_element.style.cursor = "pointer"
 }
 
-function Point(x, y) { 
-	this.x = x
-	this.y = y
+window.onresize = () => {
+    location.reload()
 }
 
-var grahamScan = (points) => {
+function choose_algorithm(element) {
 
-	if (points.length <= 3)
-		return points
-
-	getOrientation = (pointA, pointB, pointC) => {
-		let val = (pointB.y - pointA.y) * (pointC.x - pointA.x) -
-				  (pointB.x - pointA.x) * (pointC.y - pointA.y)
-		
-		// points are colinear
-		if (val == 0) 
-			return 0 
-		// clockwise or counterclockwise
-		return (val > 0 ? 1 : 2)
-	}
-
-	// relative polar coords by pivot
-	getPolarCoords = (refPoint, targetPoint) => {
-	    return { 
-	    	radians: Math.atan2(targetPoint.y - refPoint.y, 
-	    						targetPoint.x - refPoint.x),
-
-	    	distance: Math.sqrt(targetPoint.x * targetPoint.x +
-							 	targetPoint.y * targetPoint.y)
-	    }
-	}
-
-	pivot = points[0]
-	points.forEach(point => {
-		if ((point.y == pivot.y && point.x < pivot.x) || point.y < pivot.y)
-			pivot = point
-	})
-
-	// sort array and place at points[0] the bottom-most coordonate
-	points.sort((pointA, pointB) => {
-		dataPointA = getPolarCoords(pivot, pointA)
-		dataPointB = getPolarCoords(pivot, pointB)
-
-		return dataPointA.radians === dataPointB.radians ?
-			pointA.x - pointB.x :
-			dataPointA.radians - dataPointB.radians
-	})
-
-	var result = [points[0]], len = 1
-
-	for (var i = 1; i < points.length; i++) {
-		pointA = result[len - 2]
-		pointB = result[len - 1]
-		pointC = points[i]
-
-		while ((len === 1 && pointB.x === pointC.x && pointB.y === pointC.y) ||
-				(len > 1 && (getOrientation(pointA, pointB, pointC) === 1 || getOrientation(pointA, pointB, pointC) === 0))) {
-			len--;
-			pointB = pointA
-			pointA = result[len - 2]
-		}
-
-		result[len++] = pointC
-	}
-	result.length = len
-	return result	
+    var choice = element.children[0].textContent
+    
+    if (choice == "No Algorithm") {
+        localStorage.drawGraham = ""
+        document.getElementById("choose_alg").innerHTML = "&nbsp;&nbsp;&nbsp; No Algorithm"
+        toggle_algorithms_tab()
+    } else if (choice == "Graham Algorithm") {
+        localStorage.drawGraham = "draw"
+        document.getElementById("choose_alg").innerHTML = "&nbsp;&nbsp;&nbsp; Graham Algorithm"
+        toggle_algorithms_tab()
+    } else if (choice == "Jarvis Algorithm") {
+        alert("Not implemented yet...")
+    }
 }
 
 function get_coords() {
@@ -143,14 +96,10 @@ function toggle_colors_tab() {
 function toggle_algorithms_tab() {
     
     if (toggle_algorithm_tab == true) {
-        console.log(toggle_algorithm_tab)
-
         algorithms_tab.style.display = "none"
         toggle_algorithm_tab = false
 
     } else if (toggle_algorithm_tab == false) {
-        console.log(toggle_algorithm_tab)
-
         algorithms_tab.style.display = "block"
         toggle_algorithm_tab = true
     }

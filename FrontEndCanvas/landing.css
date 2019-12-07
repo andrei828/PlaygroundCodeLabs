@@ -590,9 +590,9 @@ ul {
   box-shadow: 0 0px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 }
 
-.code {
-  /* text-align: left; */
-}
+/* .code {
+  text-align: left; 
+} */
 
 .pseudocode_container {
   text-align: left;
