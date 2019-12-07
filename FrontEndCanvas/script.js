@@ -1,4 +1,4 @@
-function make2DArray(cols, rows) {
+  function make2DArray(cols, rows) {
     let arr = new Array(cols);
     for (let i = 0; i < arr.length; i++) {
       arr[i] = new Array(rows);
@@ -14,6 +14,8 @@ function make2DArray(cols, rows) {
   const coordinates = {}
   var currentX;
   var currentY;
+  var previousList = []
+  var calculating = false;
   var clickActive = false;
 
   function neighbors(x, y) {
@@ -39,6 +41,92 @@ function make2DArray(cols, rows) {
 	}
   }
 
+  function sleep(ms) {
+	return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  function Point(x, y) { 
+	this.x = x
+	this.y = y
+  }
+
+  var grahamScan = (points) => {
+	console.log("Calculating")
+	if (points.length <= 3) {
+		calculating = true;
+		return points
+	}
+
+	getOrientation = (pointA, pointB, pointC) => {
+		let val = (pointB.y - pointA.y) * (pointC.x - pointA.x) -
+				  (pointB.x - pointA.x) * (pointC.y - pointA.y)
+		
+		// points are colinear
+		if (val == 0) 
+			return 0 
+		// clockwise or counterclockwise
+		return (val > 0 ? 1 : 2)
+	}
+
+	// relative polar coords by pivot
+	getPolarCoords = (refPoint, targetPoint) => {
+	    return { 
+	    	radians: Math.atan2(targetPoint.y - refPoint.y, 
+	    						targetPoint.x - refPoint.x),
+
+	    	distance: Math.sqrt(targetPoint.x * targetPoint.x +
+							 	targetPoint.y * targetPoint.y)
+	    }
+	}
+
+	pivot = points[0]
+	points.forEach(point => {
+		if ((point.y == pivot.y && point.x < pivot.x) || point.y < pivot.y)
+			pivot = point
+	})
+
+	// sort array and place at points[0] the bottom-most coordonate
+	points.sort((pointA, pointB) => {
+		dataPointA = getPolarCoords(pivot, pointA)
+		dataPointB = getPolarCoords(pivot, pointB)
+
+		return dataPointA.radians === dataPointB.radians ?
+			pointA.x - pointB.x :
+			dataPointA.radians - dataPointB.radians
+	})
+
+	var result = [points[0]], len = 1
+
+	for (var i = 1; i < points.length; i++) {
+		pointA = result[len - 2]
+		pointB = result[len - 1]
+		pointC = points[i]
+
+		while ((len === 1 && pointB.x === pointC.x && pointB.y === pointC.y) ||
+				(len > 1 && (getOrientation(pointA, pointB, pointC) === 1 || getOrientation(pointA, pointB, pointC) === 0))) {
+			len--;
+			pointB = pointA
+			pointA = result[len - 2]
+		}
+		// stroke(155, 155, 0);
+  		// strokeWeight(1);
+		// drawLine(pointB.x, pointB.y, pointC.x, pointC.y)
+		// await sleep(500)
+		result[len++] = pointC
+	}
+	result.length = len
+	// stroke(0);
+	// strokeWeight(1);
+	// drawLine(result[result.length - 1].x, result[result.length - 1].y, result[0].x, result[0].y)
+	// await sleep(500)
+	// for (i = 1; i < result.length; i++) {
+	// 	drawLine(result[i - 1].x, result[i - 1].y, result[i].x, result[i].y)
+	// 	await sleep(500)
+	// }
+	calculating = true;
+	return result	
+  }
+
   function setup() {
 	localStorage.color = "red"
 	localStorage.state = "draw"
@@ -62,6 +150,7 @@ function make2DArray(cols, rows) {
 
 	canvas.onmousedown = function(e) {
 		clickActive = true
+		
 		x_value = ceil(e.clientX / resolution) - 1;
 		y_value = ceil(e.clientY / resolution) - 1
 
@@ -73,6 +162,7 @@ function make2DArray(cols, rows) {
 			} else {
 				coordinates[x_value].add(y_value);
 			}
+			
 		} else if (localStorage.state == "erase") {
 			if (coordinates[x_value] !== undefined && coordinates[x_value].has(y_value)) {
 				grid[x_value][y_value] = 1;
@@ -84,11 +174,13 @@ function make2DArray(cols, rows) {
 
 	canvas.onmouseup = (e) => {
 		clickActive = false
+		calculating = false
 		updateLocalStorageCoords();
 	}
 
 	canvas.onmouseleave = (e) => {
 		clickActive = false
+		calculating = false
 	}
   }
 
@@ -147,20 +239,25 @@ function make2DArray(cols, rows) {
 		}
 
 		if (localStorage.drawGraham == "draw") {
-			//localStorage.drawGraham = ""
-
-			X = 0
-			Y = 1
-			list = []
+			X = 0, Y = 1, list = []
 			for (var x_value in coordinates) {
 				coordinates[x_value].forEach((y_value) => {
-				list.push([x_value, y_value])            
-			})
+					// list.push([x_value, y_value]) 
+					list.push(new Point(parseInt(x_value), y_value))           
+				})
+			}
+			if (calculating == false) {
+				list = grahamScan(list)
+				previousList = list.slice(0)
+			} else {
+				list = previousList.slice(0)
+			} 
 
+			drawLine(list[list.length - 1].x, list[list.length - 1].y, list[0].x, list[0].y)
 			for (i = 1; i < list.length; i++) 
-			drawLine(list[i - 1][X], list[i - 1][Y], list[i][X], list[i][Y])
+				drawLine(list[i - 1].x, list[i - 1].y, list[i].x, list[i].y)
 		}
-	}
+		
 		
 		
 
@@ -195,6 +292,7 @@ function make2DArray(cols, rows) {
 	}
 
   }
+
    
     
     // let next = make2DArray(cols, rows);
